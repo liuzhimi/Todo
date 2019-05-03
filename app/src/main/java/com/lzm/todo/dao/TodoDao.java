@@ -27,13 +27,39 @@ public class TodoDao {
 
     //所有列表返回值均包含所有信息
 
-    //获取开始日期在参数日期之前的所有行程
+    //获取所有行程
     public List<Todo> getAll(){
 
         List<Todo> result = new ArrayList<>();
         Todo item;
         SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
         Cursor c = db.query(TodoDBOpenHelper.TBL_NAME,null,null,null,null,null,"stime ASC");
+        if(c.moveToFirst()){
+            do{
+                item = new Todo();
+                item.setId(c.getLong(0));
+                item.setTitle(c.getString(1));
+                item.setStartTime(c.getLong(2));
+                item.setEndTime(c.getLong(3));
+                item.setContent(c.getString(4));
+                item.setPriority(c.getInt(5));
+                item.setFirstNoticeTime(c.getLong(6));
+
+                result.add(item);
+            }while(c.moveToNext());
+        }
+        db.close();
+        return result;
+    }
+	
+	 // 搜索所有行程
+    public List<Todo> getAllByTitle(String title){
+
+        List<Todo> result = new ArrayList<>();
+        Todo item;
+        SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
+        Cursor c = db.query(TodoDBOpenHelper.TBL_NAME, null, "title like ?", new String[]{"%"+title+"%"},
+                null, null, "stime ASC");
         if(c.moveToFirst()){
             do{
                 item = new Todo();
