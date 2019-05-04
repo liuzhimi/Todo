@@ -1,4 +1,4 @@
-package com.lzm.todo.dao;
+package com.lzm.todo.entity;
 
 /**
  * Created by User0 on 2019/5/3.
