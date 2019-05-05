@@ -13,3 +13,5 @@
 .externalNativeBuild
 *.xml
 *.xml
+*.gradle
+*.xml
