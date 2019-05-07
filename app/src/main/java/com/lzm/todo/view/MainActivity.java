@@ -1,7 +1,9 @@
 package com.lzm.todo.view;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -15,11 +17,15 @@ import com.lzm.todo.adapter.MainFragmentAdapter;
 import com.lzm.todo.constant.Priority;
 import com.lzm.todo.view.calendarview.view.CalendarFragment;
 import com.lzm.todo.view.searchtodoview.SearchTodoFragment;
+import com.lzm.todo.view.todoview.model.TodoDetailModel;
+import com.lzm.todo.view.todoview.view.TodoDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends BaseFragmentActivity {
+
+    private FloatingActionButton fab;
 
     private Fragment calendarFragment;
     private Fragment searchFragment;
@@ -54,6 +60,15 @@ public class MainActivity extends BaseFragmentActivity {
 
     @Override
     protected void initView() {
+        fab = (FloatingActionButton)findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), TodoDetailActivity.class);
+                startActivity(intent);
+            }
+        });
+
         navigationView = findViewById(R.id.nav_main);
         navigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         initPage();

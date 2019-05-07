@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,8 +23,16 @@ import com.haibin.calendarview.CalendarLayout;
 import com.haibin.calendarview.CalendarView;
 import com.haibin.calendarview.TrunkBranchAnnals;
 import com.lzm.todo.R;
+import com.lzm.todo.adapter.TodoListAdapter;
+import com.lzm.todo.entity.Todo;
 import com.lzm.todo.view.MainActivity;
+import com.lzm.todo.view.calendarview.presenter.CalendarPresenter;
+import com.lzm.todo.view.calendarview.presenter.ICalendarPresenter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +51,8 @@ public class CalendarFragment extends Fragment implements
         CalendarView.OnCalendarInterceptListener,
         CalendarView.OnYearViewChangeListener,
         DialogInterface.OnClickListener,
-        View.OnClickListener {
+        View.OnClickListener,
+        ICalendarView {
 
     MainActivity activity;
 
@@ -62,6 +73,13 @@ public class CalendarFragment extends Fragment implements
     private AlertDialog mMoreDialog;
 
     private AlertDialog mFuncDialog;
+
+    private RecyclerView rv;
+    private TodoListAdapter adapter;
+    private List<Todo> todoList;
+
+    private ICalendarPresenter presenter;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -72,6 +90,12 @@ public class CalendarFragment extends Fragment implements
     }
 
     private void initView(View v){
+        rv = (RecyclerView)v.findViewById(R.id.rv);
+        adapter = new TodoListAdapter();
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        rv.setLayoutManager(manager);
+        rv.setAdapter(adapter);
+
         mTextMonthDay = (TextView) v.findViewById(R.id.tv_month_day);
         mTextYear = (TextView) v.findViewById(R.id.tv_year);
         mTextLunar = (TextView) v.findViewById(R.id.tv_lunar);
@@ -185,13 +209,13 @@ public class CalendarFragment extends Fragment implements
 
     protected void initData() {
         activity = (MainActivity) getActivity();
-
-        final int year = mCalendarView.getCurYear();
-        final int month = mCalendarView.getCurMonth();
+        todoList = new ArrayList<>();
+        presenter = new CalendarPresenter(this, getContext());
 
         Map<String, Calendar> map = new HashMap<>();
 
         mCalendarView.setSchemeDate(map);
+        loadData(System.currentTimeMillis() - 28800000);
     }
 
     @Override
@@ -266,6 +290,8 @@ public class CalendarFragment extends Fragment implements
             Toast.makeText(getContext(), getCalendarText(calendar), Toast.LENGTH_SHORT).show();
         }
 
+
+        loadData(calendar.getYear(), calendar.getMonth(), calendar.getDay());
 
         Log.e("onDateSelected", "  -- " + calendar.getYear() +
                 "  --  " + calendar.getMonth() +
@@ -349,5 +375,39 @@ public class CalendarFragment extends Fragment implements
     public void onYearChange(int year) {
         mTextMonthDay.setText(String.valueOf(year));
         Log.e("onYearChange", " 年份变化 " + year);
+    }
+
+    private void loadData(long time){
+        presenter.loadData(time);
+    }
+
+    private void loadData(int year, int month, int day){
+        Log.d("xxxx", "loadData: " + day);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        String sMonth;
+        if (month < 10){
+            sMonth = "0" + month;
+        }else{
+            sMonth = month + "";
+        }
+        String mDay;
+        if (day < 10){
+            mDay = "0" + day;
+        } else {
+            mDay = "" + day;
+        }
+        String s = year + "/" + sMonth + "/" + mDay;
+        long time = 0;
+        try {
+            time = format.parse(s).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        presenter.loadData(time);
+    }
+
+    @Override
+    public void showData(List<Todo> todoList) {
+        adapter.setNewData(todoList);
     }
 }

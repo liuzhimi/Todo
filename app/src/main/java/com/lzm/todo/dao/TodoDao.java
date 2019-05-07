@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.lzm.todo.entity.Todo;
 
@@ -85,7 +86,7 @@ public class TodoDao {
         //1 day = 86400 seconds = 86'400'000 mili seconds
         long day = time - (time % 86400000);
         long nextDay = day + 86400000;
-
+        Log.d("xxxx", "getByDay: " + day);
         List<Todo> result = new ArrayList<>();
         Todo item;
         SQLiteDatabase db = dbOpenHelper.getReadableDatabase();

@@ -6,6 +6,8 @@
     <string name="content">Content</string>
     <string name="start">Start</string>
     <string name="end">End</string>
+    <string name="notice_time">Notice</string>
+    <string name="event_save">Save</string>
 
     <string-array name="english_week_string_array">
         <item>Sun</item>

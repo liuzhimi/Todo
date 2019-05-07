@@ -8,19 +8,54 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y75"
+        android:layout_height="@dimen/y96"
+        android:background="#ffffff"
         android:paddingLeft="@dimen/x25"
         android:paddingRight="@dimen/x25">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:src="@drawable/ic_return"
+            android:layout_gravity="center_vertical"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingEnd="@dimen/dp_10"
+            tools:ignore="RtlSymmetry"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/tv_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/y35"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/event_save"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:paddingLeft="@dimen/x25"
+        android:paddingRight="@dimen/x25"
+        android:background="@color/colorWhite">
 
         <ImageView
             android:id="@+id/iv_title"
             android:layout_width="@dimen/x50"
             android:layout_height="@dimen/y50"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x25"
+            android:src="@drawable/ic_title"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:textCursorDrawable="@null"
             android:layout_toRightOf="@id/iv_title"
             android:layout_centerVertical="true"
             android:hint="@string/title"
@@ -37,15 +72,18 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y75"
+        android:layout_height="@dimen/y100"
         android:paddingLeft="@dimen/x25"
-        android:paddingRight="@dimen/x25">
+        android:paddingRight="@dimen/x25"
+        android:background="@color/colorWhite">
 
         <ImageView
             android:id="@+id/iv_time_range"
             android:layout_width="@dimen/x50"
             android:layout_height="@dimen/y50"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x25"
+            android:src="@drawable/ic_time"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -77,15 +115,17 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y75"
+        android:layout_height="@dimen/y100"
         android:paddingLeft="@dimen/x25"
-        android:paddingRight="@dimen/x25">
+        android:paddingRight="@dimen/x25"
+        android:background="@color/colorWhite">
 
         <ImageView
             android:id="@+id/iv_time_range1"
             android:layout_width="@dimen/x50"
             android:layout_height="@dimen/y50"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x25"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -107,11 +147,85 @@
             android:text="5月7日 12:30"
             android:layout_alignParentEnd="true"/>
 
-        <View
+<!--        <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="#aaaaaa"
             android:layout_toRightOf="@id/iv_time_range1"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"/>-->
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:paddingLeft="@dimen/x25"
+        android:paddingRight="@dimen/x25"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="@dimen/y20">
+
+        <ImageView
+            android:id="@+id/iv_time_notice"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/y50"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x25"
+            android:src="@drawable/ic_notice"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:layout_toRightOf="@id/iv_time_notice"
+            android:text="@string/notice_time"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/y25"
+            android:textColor="@color/colorNormalText"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:includeFontPadding="false"
+            android:textSize="@dimen/y25"
+            android:textColor="@color/colorHintText"
+            android:text="5分钟前"
+            android:layout_alignParentEnd="true"/>
+
+<!--        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#aaaaaa"
+            android:layout_toRightOf="@id/iv_time_notice"
+            android:layout_alignParentBottom="true"/>-->
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/x25"
+        android:paddingRight="@dimen/x25"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="@dimen/y20">
+
+        <ImageView
+            android:id="@+id/iv_content"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/y50"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/y25"
+            android:layout_marginBottom="@dimen/y25"
+            android:layout_marginRight="@dimen/x25"
+            android:src="@drawable/ic_content"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:textCursorDrawable="@null"
+            android:layout_toRightOf="@id/iv_content"
+            android:layout_centerVertical="true"
+            android:hint="@string/content"
+            android:textSize="@dimen/y25"
+            android:textColor="@color/colorNormalText"/>
+
     </RelativeLayout>
 </LinearLayout>

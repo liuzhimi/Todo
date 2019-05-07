@@ -15,3 +15,4 @@
 *.xml
 *.gradle
 *.xml
+.idea/misc.xml

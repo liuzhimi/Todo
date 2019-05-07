@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.lzm.todo.entity.Todo;
 import com.lzm.todo.view.todoview.model.ITodoDetailModel;
+import com.lzm.todo.view.todoview.model.TodoDetailModel;
 import com.lzm.todo.view.todoview.view.ITodoDetailView;
 
 /**
@@ -16,15 +17,15 @@ public class TodoDetailPresenter implements ITodoDetailPresenter, ITodoDetailCal
     private ITodoDetailModel model;
     private Context context;
 
-    public TodoDetailPresenter(ITodoDetailView view, ITodoDetailModel model, Context context) {
+    public TodoDetailPresenter(ITodoDetailView view,  Context context) {
         this.view = view;
-        this.model = model;
+        this.model = new TodoDetailModel(context);
         this.context = context;
     }
 
     @Override
     public void saveTodo(Todo todo) {
-
+        model.saveTodo(this, todo);
     }
 
     @Override

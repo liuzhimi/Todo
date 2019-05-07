@@ -1,10 +1,12 @@
 package com.lzm.todo.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by User0 on 2019/5/3.
  */
 
-public class Todo {
+public class Todo implements Serializable {
 
     private long id;
     private String title;

@@ -1,5 +1,7 @@
 package com.lzm.todo.view.todoview.model;
 
+import android.content.Context;
+
 import com.lzm.todo.dao.TodoDao;
 import com.lzm.todo.entity.Todo;
 import com.lzm.todo.view.todoview.presenter.ITodoDetailCallBack;
@@ -11,13 +13,15 @@ import com.lzm.todo.view.todoview.presenter.ITodoDetailCallBack;
 public class TodoDetailModel implements ITodoDetailModel{
 
     private TodoDao dao;
+    private Context context;
 
-    public TodoDetailModel() {
-        //TODO: 初始化dao
+    public TodoDetailModel(Context context) {
+        this.context = context;
+        dao = new TodoDao(context);
     }
 
     @Override
     public void saveTodo(ITodoDetailCallBack callBack, Todo todo) {
-
+        dao.insert(todo);
     }
 }
