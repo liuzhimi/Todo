@@ -1,4 +1,4 @@
-/build
-/app.iml
-/build.gradle
-/proguard-rules.pro
+build/
+app.iml
+build.gradle
+proguard-rules.pro
