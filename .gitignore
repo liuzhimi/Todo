@@ -13,3 +13,5 @@
 /settings.gradle
 /Todo.iml
 
+.idea/misc.xml
+build.gradle
