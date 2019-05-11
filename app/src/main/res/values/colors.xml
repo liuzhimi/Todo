@@ -11,4 +11,10 @@
     <color name="colorNormalText">#000000</color>
     <color name="colorHintText">#666666</color>
     <color name="colorWhite">#ffffff</color>
+
+    <color name="write">#FFFFFF</color>
+    <color name="dise">#F7F7F7</color>
+    <color name="black">#000000</color>
+    <color name="ziti">#333333</color>
+    <color name="red">#E82424</color>
 </resources>
