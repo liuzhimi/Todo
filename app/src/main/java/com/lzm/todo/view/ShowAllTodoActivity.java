@@ -57,7 +57,7 @@ public class ShowAllTodoActivity extends AppCompatActivity {
             //跳转链接 to HeYingte
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(ShowAllTodoActivity.this, String.valueOf(result.get(i).getId()), Toast.LENGTH_SHORT);
+                Toast.makeText(ShowAllTodoActivity.this, String.valueOf(result.get(i).getId()), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -97,7 +97,7 @@ public class ShowAllTodoActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //跳转链接 to HeYingte
-                Toast.makeText(ShowAllTodoActivity.this, String.valueOf(result.get(i).getId()), Toast.LENGTH_SHORT);
+                Toast.makeText(ShowAllTodoActivity.this, String.valueOf(result.get(i).getId()), Toast.LENGTH_SHORT).show();
             }
         });
     }
