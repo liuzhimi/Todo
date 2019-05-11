@@ -45,7 +45,8 @@ public class ShowAllTodoActivity extends AppCompatActivity {
             else if (nowTime >= todo.getEndTime())
                 map.put("imgTip", R.drawable.dot_red);
             map.put("todoThing", todo.getTitle());
-            map.put("todoTime", transferLongToDate(todo.getStartTime()));
+            String time = transferLongToDate(todo.getStartTime()) + "——" + transferLongToDate(todo.getEndTime());
+            map.put("todoTime", time);
             listItems.add(map);
         }
 
@@ -84,7 +85,8 @@ public class ShowAllTodoActivity extends AppCompatActivity {
             else if (nowTime >= todo.getEndTime())
                 map.put("imgTip", R.drawable.dot_red);
             map.put("todoThing", todo.getTitle());
-            map.put("todoTime", transferLongToDate(todo.getStartTime()));
+            String time = transferLongToDate(todo.getStartTime()) + "——" + transferLongToDate(todo.getEndTime());
+            map.put("todoTime", time);
             listItems.add(map);
         }
 
