@@ -1,6 +1,9 @@
 package com.lzm.todo.adapter;
 
 import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -20,6 +23,7 @@ public class TodoListAdapter extends BaseQuickAdapter<Todo, BaseViewHolder> {
     public TodoListAdapter() {
         super(R.layout.todo_item);
     }
+
 
     @Override
     protected void convert(BaseViewHolder helper, Todo item) {

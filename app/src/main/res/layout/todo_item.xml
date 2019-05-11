@@ -28,4 +28,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#aaaaaa"
+        android:layout_toRightOf="@id/iv_time_range"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

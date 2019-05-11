@@ -2,6 +2,7 @@ package com.lzm.todo.view.calendarview.view;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarLayout;
 import com.haibin.calendarview.CalendarView;
@@ -25,6 +27,7 @@ import com.haibin.calendarview.TrunkBranchAnnals;
 import com.lzm.todo.R;
 import com.lzm.todo.adapter.TodoListAdapter;
 import com.lzm.todo.entity.Todo;
+import com.lzm.todo.view.InformationActivity;
 import com.lzm.todo.view.MainActivity;
 import com.lzm.todo.view.calendarview.presenter.CalendarPresenter;
 import com.lzm.todo.view.calendarview.presenter.ICalendarPresenter;
@@ -35,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -68,6 +72,8 @@ public class CalendarFragment extends Fragment implements
 
     RelativeLayout mRelativeTool;
     private int mYear;
+    private int mMonth;
+    private int mDay;
     CalendarLayout mCalendarLayout;
 
     private AlertDialog mMoreDialog;
@@ -95,6 +101,7 @@ public class CalendarFragment extends Fragment implements
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         rv.setLayoutManager(manager);
         rv.setAdapter(adapter);
+        setMyItemClickListener();
 
         mTextMonthDay = (TextView) v.findViewById(R.id.tv_month_day);
         mTextYear = (TextView) v.findViewById(R.id.tv_year);
@@ -286,6 +293,8 @@ public class CalendarFragment extends Fragment implements
         mTextYear.setText(String.valueOf(calendar.getYear()));
         mTextLunar.setText(calendar.getLunar());
         mYear = calendar.getYear();
+        mMonth=calendar.getMonth();
+        mDay=calendar.getDay();
         if (isClick) {
             Toast.makeText(getContext(), getCalendarText(calendar), Toast.LENGTH_SHORT).show();
         }
@@ -383,7 +392,7 @@ public class CalendarFragment extends Fragment implements
 
     private void loadData(int year, int month, int day){
         Log.d("xxxx", "loadData: " + day);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd",Locale.CHINA);
         String sMonth;
         if (month < 10){
             sMonth = "0" + month;
@@ -404,10 +413,42 @@ public class CalendarFragment extends Fragment implements
             e.printStackTrace();
         }
         presenter.loadData(time);
+        Log.i("CalendarFragment",String.valueOf(time));
     }
 
     @Override
-    public void showData(List<Todo> todoList) {
-        adapter.setNewData(todoList);
+    public void showData(final List<Todo> todoList1) {
+        adapter.setNewData(todoList1);
+        todoList=todoList1;
+
+    }
+    private void setMyItemClickListener(){
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                //Toast.makeText(getContext(),"id is "+todoList.get(position).getTitle(),Toast.LENGTH_SHORT).show();
+                Todo t=todoList.get(position);
+                Intent i=new Intent(getContext(),InformationActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putLong("todoid",t.getId());
+                bundle.putString("todotitle",t.getTitle());
+                bundle.putLong("todostart",t.getStartTime());
+                bundle.putLong("todoend",t.getEndTime());
+                bundle.putLong("todonotice",t.getFirstNoticeTime());
+                bundle.putInt("todopriority",t.getPriority());
+                bundle.putString("todocontent",t.getContent());
+                i.putExtras(bundle);
+                startActivityForResult(i,100);
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==100&&resultCode==101){
+            loadData(mYear,mMonth,mDay);
+        }else if(requestCode==100&&resultCode==102){
+
+        }
     }
 }

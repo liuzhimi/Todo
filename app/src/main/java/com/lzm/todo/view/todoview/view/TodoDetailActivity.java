@@ -50,10 +50,12 @@ public class TodoDetailActivity extends AppCompatActivity implements ITodoDetail
             e.printStackTrace();
         }
         Log.d("xxxx", "initData: " + date);
-        todo = new Todo(1 ,"没事", date, date + 100, "哈哈哈哈哈", 0, date - 100);
+        todo = new Todo(1 ,"讲座c", 1557559800000l, 1557563400000l, "讲座b内容", 0, 1557558000000l);
         saveTodo();
-        todo = new Todo(2 ,"没事", date1, date1 + 100, "哈哈哈哈哈", 1, date1 - 100);
-        saveTodo();
+        //todo = new Todo(1 ,"没事", date, date + 100, "哈哈哈哈哈", 0, date - 100);
+        //saveTodo();
+        //todo = new Todo(2 ,"没事", date1, date1 + 100, "哈哈哈哈哈", 1, date1 - 100);
+        //saveTodo();
     }
 
     private void saveTodo(){

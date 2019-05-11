@@ -84,9 +84,10 @@ public class TodoDao {
     //获取参数确定的日期当天的行程
     public List<Todo> getByDay(long time){
         //1 day = 86400 seconds = 86'400'000 mili seconds
-        long day = time - (time % 86400000);
+        //long day = time - (time % 86400000);
+        long day = time;
         long nextDay = day + 86400000;
-        Log.d("xxxx", "getByDay: " + day);
+        Log.d("TodoDao", "getByDay: day=" + day + " nextDay="+nextDay);
         List<Todo> result = new ArrayList<>();
         Todo item;
         SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
@@ -167,7 +168,8 @@ public class TodoDao {
     //获取参数确定的日期当天并且在参数时间已开始的行程
     public List<Todo> getDayStartBeforeTime(long time){
         //1 day = 86400 seconds = 86'400'000 mili seconds
-        long day = time - (time % 86400000);
+        //long day = time - (time % 86400000);
+        long day = time;
 
         List<Todo> result = new ArrayList<>();
         Todo item;
@@ -197,7 +199,8 @@ public class TodoDao {
     //获取参数确定的日期当天并且在参数时间未开始的行程
     public List<Todo> getDayStartAfterTime(long time){
         //1 day = 86400 seconds = 86'400'000 mili seconds
-        long day = time - (time % 86400000) + 86400000;//nextday
+        //long day = time - (time % 86400000) + 86400000;//nextday
+        long day = time + 86400000;
 
         List<Todo> result = new ArrayList<>();
         Todo item;
