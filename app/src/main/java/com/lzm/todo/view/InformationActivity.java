@@ -95,8 +95,8 @@ public class InformationActivity extends AppCompatActivity {
                 //Toast.makeText(InformationActivity.this, "您点击了确定按钮", Toast.LENGTH_LONG).show();
                 dao.delete(todo.getId());
                 dialog.cancel();
-                Intent goback=new Intent();
-                setResult(101,goback);
+                //Intent goback=new Intent();
+                //setResult(101,goback);
                 finish();
             }
         });
@@ -113,8 +113,8 @@ public class InformationActivity extends AppCompatActivity {
         dialog.show();
     }
     protected void goback(View v){
-        Intent i=new Intent();
-        setResult(102,i);
+        //Intent i=new Intent();
+        //setResult(102,i);
         finish();
     }
 }

@@ -222,7 +222,15 @@ public class CalendarFragment extends Fragment implements
         Map<String, Calendar> map = new HashMap<>();
 
         mCalendarView.setSchemeDate(map);
-        loadData(System.currentTimeMillis() - 28800000);
+        //loadData(System.currentTimeMillis() - 28800000);
+        SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd",Locale.CHINA);
+        Date d=new Date(System.currentTimeMillis());
+        String s=f.format(d);
+        Log.i("CalendarFragment","the day is "+s);
+        String[] arr=s.split("-");
+        mYear=Integer.parseInt(arr[0]);
+        mMonth=Integer.parseInt(arr[1]);
+        mDay=Integer.parseInt(arr[2]);
     }
 
     @Override
@@ -438,11 +446,12 @@ public class CalendarFragment extends Fragment implements
                 bundle.putInt("todopriority",t.getPriority());
                 bundle.putString("todocontent",t.getContent());
                 i.putExtras(bundle);
-                startActivityForResult(i,100);
+                startActivity(i);
+                //startActivityForResult(i,100);
             }
         });
     }
-
+/*
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode==100&&resultCode==101){
@@ -450,5 +459,14 @@ public class CalendarFragment extends Fragment implements
         }else if(requestCode==100&&resultCode==102){
 
         }
+    }
+*/
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i("CalendarFragment", "onResume: "+mYear+" "+mMonth+" "+mDay);
+        loadData(mYear,mMonth,mDay);
     }
 }
