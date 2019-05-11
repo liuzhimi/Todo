@@ -17,7 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.InformationActivity"></activity>
+        <activity android:name=".view.InformationActivity"/>
+        <activity android:name=".view.ShowAllTodoActivity"/>
     </application>
 
 </manifest>
